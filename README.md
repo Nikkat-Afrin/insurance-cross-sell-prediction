@@ -2,7 +2,8 @@
 
 **Predict which existing insurance customers are most likely to buy an additional product, so the sales team can prioritize high-propensity cross-sell leads.**
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![Models](https://img.shields.io/badge/Models-KNN%20%7C%20SVM%20%7C%20RandomForest-orange) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/Nikkat-Afrin/insurance-cross-sell-prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/Nikkat-Afrin/insurance-cross-sell-prediction/actions/workflows/ci.yml) ![Python](https://img.shields.io/badge/Python-3.12-blue) ![Models](https://img.shields.io/badge/Models-KNN%20%7C%20SVM%20%7C%20RandomForest-orange)
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -69,3 +70,18 @@ insurance-cross-sell-prediction/
 
 ---
 *Academic project (DAV 6150, Module 8), extended with a Random-Forest benchmark and a consolidated model comparison.*
+
+
+## ⚖️ Fairness & calibration audit (`src/fairness_audit.py`)
+
+High AUC isn't the same as deployable. The audit script asks the two questions a model reviewer would:
+
+```bash
+python src/fairness_audit.py     # -> reports/fairness_audit.md + figures
+pytest tests/                    # audit logic tested on synthetic known-bias cases
+```
+
+- **Group fairness across age bands** — selection rate (demographic parity, screened with the 80% rule), TPR/FPR (equalized odds), precision, and AUC per group.
+- **Finding worth knowing:** the ≤25 band is selected at only ~0.22× the rate of the 36–50 band. Its *base rate* is genuinely lower (14% vs 59%), so this is base-rate-driven rather than a pure model artifact — but it is exactly the kind of disparity an insurer must document and review before deployment. The audit makes it visible instead of leaving it buried in an aggregate AUC.
+- **Calibration** — reliability table + Brier scores show whether "0.7 probability" really converts ~70% of the time; per-group Brier catches groups whose scores are less trustworthy.
+- The audit logic is unit-tested against synthetic populations with *known* injected bias (flag must fire) and identical groups (flag must stay silent).
