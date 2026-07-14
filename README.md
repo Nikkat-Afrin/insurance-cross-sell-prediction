@@ -2,7 +2,7 @@
 
 **Predict which existing insurance customers are most likely to buy an additional product, so the sales team can prioritize high-propensity cross-sell leads.**
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![Models](https://img.shields.io/badge/Models-KNN%20%7C%20SVM%20%7C%20RandomForest-orange)
+![Python](https://img.shields.io/badge/Python-3.12-blue) ![Models](https://img.shields.io/badge/Models-KNN%20%7C%20SVM%20%7C%20RandomForest-orange) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
