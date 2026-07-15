@@ -1,4 +1,4 @@
-# Fairness & Calibration Audit — Cross-Sell Model
+# Fairness & Calibration Audit - Cross-Sell Model
 
 Decision threshold: 0.5
 
@@ -41,4 +41,4 @@ Flagged groups: ['<=25'] (selection-rate ratio < 0.8 vs most-selected group)
 | 0.9-1.0 |  969 |           0.9886 |          0.999  |
 
 _Interpretation: mean_predicted ≈ observed_rate per bin means the
-score is honest — a 0.7 score converts ~70% of the time._
+score is honest - a 0.7 score converts ~70% of the time._
